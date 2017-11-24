@@ -1,0 +1,95 @@
+swagger: "2.0"
+info:
+  version: "2.0.0"
+  title: mkDVD
+# during dev, should point to your local machine
+host: localhost:8080
+# basePath prefixes all resource paths
+basePath: /v2
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /directory:
+    x-swagger-router-controller: directory
+    get:
+      description: Returns directory content
+      parameters:
+        - name: path
+          in: query
+          description: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            properties:
+              path:
+                type: string
+              subroutines:
+                type: array
+                items:
+                  type: string
+              content:
+                type: array
+                items:
+                  properties:
+                    path:
+                      type: string
+                    isDir:
+                      type: boolean
+        "403":
+          description: Forbidden
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Performs action on path
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/PathAction"
+      responses:
+        "200":
+          description: Success
+          schema: {}
+        "400":
+          description: Parameter error
+          schema:
+            properties:
+              parameters:
+                type: object
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  PathAction:
+    required:
+      - path
+      - action
+    properties:
+      path:
+        type: string
+      action:
+        type: string
+      additionalProperties:
+        type: object
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
