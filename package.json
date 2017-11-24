@@ -1,0 +1,33 @@
+{
+  "name": "mkDVD-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "mkDVD-api",
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0",
+  "main": "app.js",
+  "dependencies": {
+    "bluebird": "3.5.1",
+    "child-process-promise": "^2.2.1",
+    "config": "1.27.0",
+    "express": "^4.12.3",
+    "node-fetch": "^1.7.3",
+    "swagger-express-mw": "^0.1.0"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "dotenv": "^1.2.0",
+    "mocha": "^2.2.5",
+    "nock": "^9.1.0",
+    "request": "^2.58.0",
+    "should": "^7.1.0",
+    "supertest": "^1.0.0",
+    "z-schema": "^3.12.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "mock": "swagger project start -m",
+    "test": "swagger project test"
+  }
+}
