@@ -6,7 +6,7 @@ const basepath = config.basepath
 
 const mkdvd = require('./mkdvd')
 
-const mvURL = 'http://localhost:10010'
+const mvURL = config.mvURL
 
 function post (req, res) {
   const action = req.swagger.params.body.value.action

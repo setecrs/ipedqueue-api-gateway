@@ -6,8 +6,9 @@ FROM node:7.10.0-alpine
 #xargs -> findutils
 RUN apk add --no-cache bash coreutils cdrkit findutils
 
-COPY ./ /usr/local/src/
 WORKDIR /usr/local/src/
+COPY package.json .
 RUN npm install
+ADD . .
 EXPOSE 80
 CMD npm start

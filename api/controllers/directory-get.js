@@ -7,6 +7,7 @@ const fetch = require('node-fetch')
 const path = require('path')
 const config = require('config')
 const basepath = config.basepath
+const querystring = require('querystring')
 
 function listItems(fullPath){
   return fs.readdirAsync(fullPath)
@@ -25,24 +26,26 @@ function listItems(fullPath){
         }))
     })}
 
-const mvURL = 'http://localhost:10010'
+const mvURL = config.mvURL
 
 async function listSubroutines(path){
   try {
+    const url = mvURL + '/action?' + querystring.stringify({path})
     const fetched = await fetch(url, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json'
-      },
-      qs: {path}
+      }
     })
-    const json = fetched.json()
+    const json = await fetched.json()
+    console.log({json, path})
     if (json.enabled) {
-      ['mkdvd', 'mv']
+      return ['mkdvd', 'mv']
     } else {
       return ['mkdvd']
     }
   } catch (error) {
+    console.log({error})
     return ['mkdvd']
   }
 }

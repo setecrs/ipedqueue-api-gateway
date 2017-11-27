@@ -3,12 +3,12 @@ info:
   version: "2.0.0"
   title: mkDVD
 # during dev, should point to your local machine
-host: localhost:8080
+#host: localhost:8080
 # basePath prefixes all resource paths
 basePath: /v2
 schemes:
   # tip: remove http to make production-grade
-  - http
+  #- http
   - https
 consumes:
   - application/json
