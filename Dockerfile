@@ -6,7 +6,7 @@ FROM node:7.10.0-alpine
 #xargs -> findutils
 RUN apk add --no-cache bash coreutils cdrkit findutils
 
-WORKDIR /usr/local/src/
+WORKDIR /usr/local/src/microservices-api-gateway
 COPY package.json .
 RUN npm install
 ADD . .
