@@ -3,18 +3,32 @@ info:
   version: "2.0.0"
   title: mkDVD
 # during dev, should point to your local machine
-#host: localhost:8080
+# host: localhost:8080
 # basePath prefixes all resource paths
 basePath: /v2
 schemes:
   # tip: remove http to make production-grade
-  #- http
+  - http
   - https
 consumes:
   - application/json
 produces:
   - application/json
 paths:
+  /basepath:
+    x-swagger-router-controller: basepath
+    get:
+      responses:
+        "200":
+          description: Success
+          schema:
+            properties:
+              basepath:
+                type: string
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /directory:
     x-swagger-router-controller: directory
     get:

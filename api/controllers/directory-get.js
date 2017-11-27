@@ -5,9 +5,9 @@ const Promise = require('bluebird')
 const fs = Promise.promisifyAll(require('fs'))
 const fetch = require('node-fetch')
 const path = require('path')
+const querystring = require('querystring')
 const config = require('config')
 const basepath = config.basepath
-const querystring = require('querystring')
 
 function listItems(fullPath){
   return fs.readdirAsync(fullPath)
@@ -35,10 +35,9 @@ async function listSubroutines(path){
       method: 'GET',
       headers: {
         'Content-type': 'application/json'
-      }
+      },
     })
     const json = await fetched.json()
-    console.log({json, path})
     if (json.enabled) {
       return ['mkdvd', 'mv']
     } else {
