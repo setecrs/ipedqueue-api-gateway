@@ -24,7 +24,19 @@ function listItems(fullPath){
         .then(obj => Object.assign(obj,{
           path: path.join(fullPath, item),
         }))
-    })}
+    })
+    .map(item => {
+      return listSubroutines(item.path)
+      .then(subroutines => {
+        //rm mkdvd
+        if (subroutines[0] === 'mkdvd') {
+          subroutines = subroutines.slice(1)
+        }
+        item.subroutines = subroutines
+        return item
+      })
+    })
+}
 
 const mvURL = config.mvURL
 
@@ -53,7 +65,6 @@ async function get (req, res) {
   try {
     const path = req.swagger.params.path.value || ''
     if (!path.startsWith(basepath)) {
-      console.log({path, basepath})
       return res.status(403).end()
     }
     const contentPromise = listItems(path)

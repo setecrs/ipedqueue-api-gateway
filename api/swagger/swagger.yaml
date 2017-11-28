@@ -58,6 +58,10 @@ paths:
                       type: string
                     isDir:
                       type: boolean
+                    subroutines:
+                      type: array
+                      items:
+                        type: string
         "403":
           description: Forbidden
         default:
