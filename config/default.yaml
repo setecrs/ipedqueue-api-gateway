@@ -1,6 +1,7 @@
 port: 80
 basepath: /operacoes
 mvURL: http://localhost:10010
+jobURL: http://localhost:1234
 # swagger configuration file
 
 # values in the swagger hash are system configuration for swagger-node
