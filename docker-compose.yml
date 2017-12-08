@@ -9,6 +9,6 @@ services:
       - localhost:8888:7777
     environment:
       - PORT=7777
-      - BASEPATH=/operacoes/
+      - BASEPATH=/operacoes
     command: ./node_modules/.bin/nodemon app.js
 
