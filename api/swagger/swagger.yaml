@@ -30,7 +30,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /running:
-    x-swagger-router-controller: running-get
+    x-swagger-router-controller: running
     get:
       description: Return map of mv requests
       responses:

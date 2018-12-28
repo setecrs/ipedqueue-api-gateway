@@ -29,4 +29,6 @@ async function get (req, res) {
   }
 }
 
-module.exports = (req, res) => get(req, res)
+module.exports = {
+  get: (req, res) => get(req, res),
+}

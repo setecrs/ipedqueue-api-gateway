@@ -38,6 +38,8 @@ function listItems(fullPath){
     })
 }
 
+const mvURL = config.mvURL
+
 async function checkmv(path){
   const url = mvURL + '/action?' + querystring.stringify({path})
   const fetched = await fetch(url, {
@@ -105,6 +107,4 @@ async function get (req, res) {
   }
 }
 
-module.exports = {
-  get,
-}
+module.exports = (req, res) => get(req, res)
