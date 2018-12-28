@@ -8,6 +8,7 @@ RUN apk add --no-cache bash coreutils cdrkit findutils
 
 WORKDIR /usr/local/src/microservices-api-gateway
 COPY package.json .
+COPY package-lock.json .
 RUN npm install
 ADD . .
 EXPOSE 80
