@@ -3,9 +3,7 @@
 const util = require('util')
 const Promise = require('bluebird')
 const fs = Promise.promisifyAll(require('fs'))
-const fetch = require('node-fetch')
 const path = require('path')
-const querystring = require('querystring')
 const config = require('config')
 const basepath = config.basepath
 
@@ -38,47 +36,9 @@ function listItems(fullPath){
     })
 }
 
-const mvURL = config.mvURL
-
-async function checkmv(path){
-  const url = mvURL + '/action?' + querystring.stringify({path})
-  const fetched = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json'
-    },
-  })
-  const json = await fetched.json()
-  return (!!json.enabled)
-}
-
-const jobURL = config.jobURL
-async function checkState(path){
-  const url = jobURL + '/material?' + querystring.stringify({path})
-  const fetched = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json'
-    },
-  })
-  try {
-    const json = await fetched.json()
-    return (json.state)
-  } catch (error) {
-    return null
-  }
-}
-
 async function listSubroutines(path){
   try {
     const result = ['mkdvd']
-    if (await checkmv(path)) {
-      result.push('mv')
-    }
-    const state = await checkState(path)
-    if (state) {
-      result.push(state)
-    }
     return result
   } catch (error) {
     console.log({error})
