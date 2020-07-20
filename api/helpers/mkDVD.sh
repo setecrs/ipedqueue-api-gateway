@@ -21,4 +21,5 @@ trap "rm -rf $DVD" EXIT
 
   find -L "$@" -maxdepth 5 -name indexador -prune -o -name 'hashlog.*' -print0 -o -name 'Lista de Arquivos.csv' -print0 | xargs -0 tar c | tar x -C $DVD
   mkisofs  -U -udf -iso-level 4 -allow-limited-size -f -o "$1"/DVD-anexo-laudo.iso "$1"/hashes.txt $DVD
+  chmod 777 "$1"/DVD-anexo-laudo.iso "$1"/hashes.txt
 ) 3>>"$1"/hashes.txt || exit 1
