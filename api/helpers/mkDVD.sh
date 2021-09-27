@@ -15,7 +15,7 @@ trap "rm -rf $DVD" EXIT
 (
   flock -n 3 || exit 1
 
-  stdbuf -o 0 find "$@" -maxdepth 5 -name indexador -prune -o -name 'hashlog.*' -print0 -o -name 'Lista de Arquivos.csv' -print0 |\
+  stdbuf -o 0 find -L "$@" -maxdepth 5 -name indexador -prune -o -name 'hashlog.*' -print0 -o -name 'Lista de Arquivos.csv' -print0 |\
   xargs -L1 -0 sha256sum |\
   tee "$1"/hashes.txt
 
