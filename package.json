@@ -18,7 +18,7 @@
   "devDependencies": {
     "chai": "3.5.0",
     "dotenv": "^1.2.0",
-    "mocha": "^2.2.5",
+    "mocha": "^10.1.0",
     "nock": "^9.1.0",
     "nodemon": "^1.12.1",
     "request": "^2.58.0",
